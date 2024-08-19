@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Care</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: sans-serif;
+            background-image: url('d9d7f53472ef66cc472f1009b0f44b07.jpeg');
+            background-size: cover;
+            background-position: center;
+        }
+        .header {
+            background-color: #f2f2f2;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+        }
+        .nav {
+            display: flex;
+            gap: 20px;
+        }
+        .nav a {
+            text-decoration: none;
+            color: #333;
+        }
+        .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 40px;
+        }
+        .left-section {
+            flex: 2;
+        }
+        .right-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .title {
+            font-size: 36px;
+            font-weight: bold;
+            color: #f5efef;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            font-size: 18px;
+            color: #ecebeb;
+        }
+        .language-select {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .language-select .flag {
+            width: 30px;
+            height: 20px;
+        }
+        .language-select .country {
+            font-size: 16px;
+            color: #333;
+        }
+        .language-dropdown {
+            position: absolute;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            display: none;
+            z-index: 1000;
+            width: 200px;
+        }
+        .language-dropdown .option {
+            padding: 5px;
+            cursor: pointer;
+        }
+        .language-dropdown .option:hover {
+            background-color: #f2f2f2;
+        }
+        .loan-amount {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            position: relative;
+        }
+        .loan-amount .amount {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .loan-slider {
+            width: 100%;
+            height: 10px;
+            background-color: #ddd;
+            border-radius: 5px;
+            position: relative;
+            cursor: pointer;
+        }
+        .loan-slider .slider-thumb {
+            position: absolute;
+            top: -5px;
+            left: 0;
+            width: 20px;
+            height: 20px;
+            background-color: #f00;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        .button {
+            background-color: #f00;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .get-care-button {
+            background-color: antiquewhite;
+            color: #f00;
+            margin-top: 20px; /* Space between content and button */
+            border-radius: 26.82px;
+            padding: 15px 30px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <img src="care.jpg" width="80" alt="Logo">
+        </div>
+        <nav class="nav">
+            <a href="index.html">home</a>
+            <a href="services.html">services</a>
+            <a href="aboutus.html">about us</a>
+            <a href="blogs.html">blog</a>
+            <div class="language-select">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Flag_of_India.svg/2000px-Flag_of_India.svg.png" alt="India" class="flag">
+                <span class="country">India</span>
+                <i class="fa fa-angle-down"></i>
+                <div class="language-dropdown">
+                    <div class="option" data-lang="India">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Flag_of_India.svg/2000px-Flag_of_India.svg.png" alt="India" class="flag">
+                        India
+                    </div>
+                    <div class="option" data-lang="United Kingdom">
+                        <img src="Flag-United-Kingdom.webp" alt="United Kingdom" class="flag">
+                        United Kingdom
+                    </div>
+                    <div class="option" data-lang="Germany">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Flag_of_Germany.svg/2000px-Flag_of_Germany.svg.png" alt="Germany" class="flag">
+                        Germany
+                    </div>
+                </div>
+            </div>
+            <button class="button" ><a href="login.html">log in</a></button>
+        </nav>
+    </header>
+    <main class="container">
+        <section class="left-section">
+            <h1 class="title">get debt free with <br> Moneytor Care</h1>
+            <p class="subtitle">your path to a debt free future</p>
+        </section>
+        <section class="right-section">
+            <div class="loan-amount">
+                <p class="amount">₹12,47,000</p>
+                <p>your loan amount</p>
+                <div class="loan-slider" id="loan-slider">
+                    <div class="slider-thumb" id="slider-thumb"></div>
+                </div>
+            </div>
+            <button class="button get-care-button">get care</button>
+        </section>
+    </main>
+    <script>
+        const slider = document.getElementById('loan-slider');
+        const thumb = document.getElementById('slider-thumb');
+        const amountText = document.querySelector('.loan-amount .amount');
+
+        let isDragging = false;
+
+        slider.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            updateSlider(e);
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            if (isDragging) {
+                updateSlider(e);
+            }
+        });
+
+        document.addEventListener('mouseup', () => {
+            isDragging = false;
+        });
+
+        function updateSlider(e) {
+            const rect = slider.getBoundingClientRect();
+            const offsetX = e.clientX - rect.left;
+            const percent = Math.min(Math.max(0, offsetX / rect.width), 1);
+            const value = Math.round(percent * 1247000); // Assuming 1% represents ₹12,47,000
+
+            thumb.style.left = `${percent * 100}%`;
+            amountText.textContent = `₹${value.toLocaleString()}`;
+        }
+    </script>
+</body>
+</html>
